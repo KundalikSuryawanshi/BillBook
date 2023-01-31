@@ -1,16 +1,17 @@
 package com.kundalik.billbook.auth
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-import com.kundalik.billbook.MainActivity
 import com.kundalik.billbook.R
 import com.kundalik.billbook.databinding.ActivityOtpactivityBinding
 import java.util.concurrent.TimeUnit
@@ -21,13 +22,23 @@ class OTPActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOtpactivityBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var verificationId: String
-    private lateinit var dialog: AlertDialog
+    private lateinit var timer: CountDownTimer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtpactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getUserData()
+        auth = FirebaseAuth.getInstance()
+        val userMobile = "+91"+intent.getStringExtra("mobile").toString()
+
+        setCountDownTimer()
+
+        performVerification(userMobile, auth)
+
+        binding.tvResendOtp.setOnClickListener {
+            performVerification(userMobile, auth)
+        }
 
         binding.btnOtpCnt.setOnClickListener {
             verifyUserOtp(verificationId)
@@ -36,25 +47,30 @@ class OTPActivity : AppCompatActivity() {
 
     }
 
-    private fun getUserData() {
-        val userName = intent.getStringExtra("name").toString()
-        val userEmail = intent.getStringExtra("email").toString()
-        val userMobile = "+91" + intent.getStringExtra("mobile").toString()
-        auth = FirebaseAuth.getInstance()
+    private fun setCountDownTimer() {
 
-        performVerification(userMobile, auth)
+        timer = object : CountDownTimer(6000, 10) {
 
+            override fun onTick(millisUntilFinished: Long) {
+                binding.etCountDown.text = millisUntilFinished.toString()
+            }
+
+            override fun onFinish() {
+                binding.etCountDown.text = "Failed!!!!!"
+            }
+
+        }
     }
 
 
     private fun performVerification(userMobile: String, auth: FirebaseAuth) {
 
-        val builder = AlertDialog.Builder(this)
-
-        builder.setMessage("Please wait.......")
-        builder.setTitle("Loading")
-        builder.setCancelable(false)
-        dialog = builder.create()
+        val dialog = Dialog(this@OTPActivity)
+        dialog.setContentView(R.layout.loading_layout)
+        if (dialog.window != null) {
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+        }
+        dialog.setCancelable(false)
         dialog.show()
 
         val authOptions = PhoneAuthOptions.newBuilder(auth)
@@ -88,20 +104,45 @@ class OTPActivity : AppCompatActivity() {
     }
 
     private fun verifyUserOtp(verificationId: String) {
+
+        val dialog = Dialog(this@OTPActivity)
+        dialog.setContentView(R.layout.loading_layout)
+        if (dialog.window != null) {
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+        }
+        dialog.setCancelable(false)
+        dialog.show()
+
+
         if (binding.etUserOtp.text!!.isNotEmpty()) {
-            dialog.show()
             val authCredential =
                 PhoneAuthProvider.getCredential(verificationId, binding.etUserOtp.text!!.toString())
             auth.signInWithCredential(authCredential)
-                .addOnCompleteListener {
-                    startActivity(Intent(this@OTPActivity, MainActivity::class.java))
+                .addOnSuccessListener {
+                    startActivity(Intent(this@OTPActivity, RegistrationActivity::class.java))
                     dialog.dismiss()
                     finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this@OTPActivity, "Error ${it.message}", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
                 }
         } else {
             Toast.makeText(this@OTPActivity, "Enter OTP (one time password)", Toast.LENGTH_SHORT)
                 .show()
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        timer.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        timer.cancel()
+    }
+
+
 
 }

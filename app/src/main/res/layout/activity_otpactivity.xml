@@ -93,6 +93,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/et_count_down"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="00.00" />

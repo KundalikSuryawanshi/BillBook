@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.kundalik.billbook.adapter.ViewPagerAdapter
 import com.kundalik.billbook.auth.LoginActivity
+import com.kundalik.billbook.auth.MobileNumberActivity
 import com.kundalik.billbook.auth.RegistrationActivity
 import com.kundalik.billbook.databinding.ActivityMainBinding
 import com.kundalik.billbook.fragments.ExpenseFragment
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkUserNullOrNot() {
         auth = FirebaseAuth.getInstance()
         if (auth.currentUser == null) {
-            startActivity(Intent(this@MainActivity, RegistrationActivity::class.java))
+            startActivity(Intent(this@MainActivity, MobileNumberActivity::class.java))
             finish()
         }
     }
