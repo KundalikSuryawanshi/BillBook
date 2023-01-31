@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "378153185437",
+    "project_id": "billbook-34af1",
+    "storage_bucket": "billbook-34af1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378153185437:android:cca8e6c60e7543694d6474",
+        "android_client_info": {
+          "package_name": "com.kundalik.billbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378153185437-lb1rquv59pq85b6mbc84qgbbnh9mk3pl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo4Ba5w-s2YpfvDuRYWF0HneLPcc-KW80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378153185437-lb1rquv59pq85b6mbc84qgbbnh9mk3pl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
