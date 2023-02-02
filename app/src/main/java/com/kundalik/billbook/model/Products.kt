@@ -1,7 +1,35 @@
 package com.kundalik.billbook.model
 
 data class Products(
-    val id: String? = "",
-    val name: String? ="",
-    val amount: Long? = 0
+    val productName1: String? = "",
+    val productAmount1: Long = 0,
+    val productName2: String? = "",
+    val productAmount2: Long = 0,
+    val productName3: String? = "",
+    val productAmount3: Long = 0,
+    val productName4: String? = "",
+    val productAmount4: Long = 0,
+    val productName5: String? = "",
+    val productAmount5: Long = 0,
+    val productName6: String? = "",
+    val productAmount6: Long = 0,
+    val productName7: String? = "",
+    val productAmount7: Long = 0,
+    val productName8: String? = "",
+    val productAmount8: Long = 0,
+    val productName9: String? = "",
+    val productAmount9: Long = 0,
+    val productName0: String? = "",
+    val productAmount10: Long = 0,
+    val productName11: String? = "",
+    val productAmount11: Long = 0,
+    val productName12: String? = "",
+    val productAmount12: Long = 0,
+    val productName13: String? = "",
+    val productAmount13: Long = 0,
+    val productName14: String? = "",
+    val productAmount14: Long = 0,
+    val productName15: String? = "",
+    val productAmount15: Long = 0,
+
 )

@@ -50,13 +50,7 @@ class RegistrationActivity : AppCompatActivity() {
 
 
         binding.btnContinueRegistration.setOnClickListener {
-            if (selectedImg == null) {
-                Toast.makeText(
-                    this@RegistrationActivity,
-                    "Select Profile Image",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else if (binding.etUserName.text!!.isEmpty() && binding.etUserEmail.text!!.isEmpty() && binding.etUserMobile.text!!.isEmpty()) {
+            if (binding.etUserName.text!!.isEmpty() && binding.etUserEmail.text!!.isEmpty() && binding.etUserMobile.text!!.isEmpty() && selectedImg == null) {
                 Toast.makeText(
                     this@RegistrationActivity,
                     "Enter all the fields!",

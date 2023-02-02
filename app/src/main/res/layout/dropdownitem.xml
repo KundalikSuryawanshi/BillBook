@@ -1,0 +1,11 @@
+<TextView
+    android:id="@+id/selected_product"
+    android:layout_width="match_parent"
+    android:text="Milk"
+    android:padding="14dp"
+    android:textStyle="bold"
+    android:textColor="@color/black"
+    android:textSize="18sp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"/>
+
