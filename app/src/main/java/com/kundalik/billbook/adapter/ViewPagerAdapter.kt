@@ -12,7 +12,7 @@ class ViewPagerAdapter(
 ): FragmentPagerAdapter(fragmentManager!!) {
 
     companion object {
-        val TAB_TITLE = arrayOf("Expense","Previous","Others")
+        val TAB_TITLE = arrayOf("Products","Expense","Others")
     }
     override fun getCount(): Int {
         return fragmentList.size
