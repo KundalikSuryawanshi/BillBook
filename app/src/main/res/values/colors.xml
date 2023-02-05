@@ -10,6 +10,8 @@
 
     <color name="colorPrimary">#128c7e</color>
     <color name="colorPrimaryDark">#075e54</color>
-    <color name="ascent">#25d366</color>
+    <color name="btn_green">#00E154</color>
+    <color name="btn_red">#FF0000</color>
+    <color name="btn_yellow">#FFBF00</color>
 
 </resources>

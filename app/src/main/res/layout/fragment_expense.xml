@@ -623,20 +623,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-
-
-                    <Button
-                        android:id="@+id/btn_cancle"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:text="Cancle"
-                        android:layout_margin="5dp"
-                        android:inputType="number"
-                        android:padding="10dp" />
-
-
                     <Button
                         android:id="@+id/btn_continue"
                         android:layout_width="match_parent"
