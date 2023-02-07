@@ -14,4 +14,7 @@
     <color name="btn_red">#FF0000</color>
     <color name="btn_yellow">#FFBF00</color>
 
+
+    <color name="light_gray">#E5EBEA</color>
+
 </resources>

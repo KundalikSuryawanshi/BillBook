@@ -192,11 +192,11 @@ class ExpenseFragment : Fragment() {
 
         binding.btnContinue.setOnClickListener {
 
-            val dialog = LayoutInflater.from(requireContext()).inflate(R.layout.item_expense_dialog, null)
+            val dialog =
+                LayoutInflater.from(requireContext()).inflate(R.layout.item_expense_dialog, null)
             val mBuilder = AlertDialog.Builder(requireContext())
                 .setView(dialog)
             val expdialog = mBuilder.show()
-
 
 
             //calculating total
@@ -241,18 +241,26 @@ class ExpenseFragment : Fragment() {
                 val SC =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_shop_cash).text.toString()) //shop cash
 
-                val dailyTotal = (CC + BC + SC)
-                DT = dialog.findViewById(R.id.et_daily_total)
-                DT.setText(dailyTotal.toString())
+                if (CC != null && BC!= null && SC != null) {
+                    val dailyTotal = (CC + BC + SC)
+                    dialog.findViewById<TextInputEditText>(R.id.et_daily_total).setText(dailyTotal.toString())
+                } else {
+                    Toast.makeText(requireContext(), "Enter all the value", Toast.LENGTH_SHORT).show()
+                }
+
             }
             //set 5% percent
             val makeFivePer = dialog.findViewById<Button>(R.id.btn_make_five_per)
             makeFivePer.setOnClickListener {
                 val dt = dialog.findViewById(R.id.et_daily_total) as TextInputEditText
                 val DT = parseInt(dt.text.toString())
-                val fivePercent = ((DT / 100) * 5)
-                DD = dialog.findViewById(R.id.et_five_per) //five percent
-                DD.setText(fivePercent.toString())
+                if(DT != null) {
+                    val fivePercent = ((DT / 100) * 5)
+                    DD = dialog.findViewById(R.id.et_five_per) //five percent
+                    DD.setText(fivePercent.toString())
+                } else {
+                    Toast.makeText(requireContext(), "Enter all the value", Toast.LENGTH_SHORT).show()
+                }
             }
             //set cash in will became next home cash
             val makeCashIn = dialog.findViewById<Button>(R.id.btn_make_cash_in)
@@ -261,10 +269,15 @@ class ExpenseFragment : Fragment() {
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_shop_cash).text.toString()) //shop cash
                 val dt =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_five_per).text.toString()) //daily total
-                val cashIn = (SC - dt)
-                CI = dialog.findViewById(R.id.et_cash_in)
-                CI.setText(cashIn.toString())
+                if(SC != null) {
+                    val cashIn = ( SC - dt)
+                    CI = dialog.findViewById(R.id.et_cash_in)
+                    CI.setText(cashIn.toString())
+                }  else {
+                    Toast.makeText(requireContext(), "Enter all the value", Toast.LENGTH_SHORT).show()
+                }
             }
+            //save Expense
             val saveDailyExpense = dialog.findViewById<Button>(btn_save_expense)
 
             saveDailyExpense.setOnClickListener {
@@ -291,8 +304,11 @@ class ExpenseFragment : Fragment() {
                 val onlineBanking =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_online_banking).text.toString())
 
-                val shopExpense =
+                val shopCash =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_shop_cash).text.toString())
+
+                val dailyTotal =
+                    parseInt(dialog.findViewById<TextInputEditText>(R.id.et_daily_total).text.toString())
 
                 val fivePercent =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_five_per).text.toString())
@@ -300,39 +316,44 @@ class ExpenseFragment : Fragment() {
                 val cashIn =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_cash_in).text.toString())
 
-//
+
                 val expense =
                     Expense(
                         currentCash,
                         homeCash,
                         onlineBanking,
-                        shopExpense,
+                        dailyTotal,
+                        shopCash,
                         fivePercent,
                         cashIn
                     )
 
-                database.reference.child("Expenses").child("year: ${year}")
-                    .child("month:${month}")
-                    .child("date:${date}")
-                    .setValue(expense)
-                    .addOnSuccessListener {
-                        Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
-                        dialog2.dismiss()
-                        expdialog.dismiss()
-                        clearAllFields()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(
-                            requireContext(),
-                            "Error ${it.message}",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                        dialog2.dismiss()
-                    }
-            }
-                expdialog.show()
 
+//for testing   database.reference.child("expense").child(date).setValue(expense)
+                if (currentCash != null && homeCash != null && onlineBanking != null && dailyTotal != null && shopCash != null && fivePercent != null && cashIn != null) {
+
+                    database.reference.child("Expenses").child(year).child(date)
+                        .setValue(expense)
+                        .addOnSuccessListener {
+                            Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
+                            dialog2.dismiss()
+                            expdialog.dismiss()
+                            clearAllFields()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(
+                                requireContext(),
+                                "Error ${it.message}",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            dialog2.dismiss()
+                        }
+                } else {
+                    Toast.makeText(requireContext(), "Enter All the fields", Toast.LENGTH_SHORT).show()
+                }
+                expdialog.show()
+            }
 
         }
 
