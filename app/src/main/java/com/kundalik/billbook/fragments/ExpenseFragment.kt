@@ -20,6 +20,7 @@ import com.kundalik.billbook.R.id.btn_save_expense
 import com.kundalik.billbook.databinding.FragmentExpenseBinding
 import com.kundalik.billbook.model.Expense
 import java.lang.Integer.parseInt
+import java.text.DateFormat
 import java.util.Calendar
 
 
@@ -41,10 +42,12 @@ class ExpenseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+
         // Inflate the layout for this fragment
         binding = FragmentExpenseBinding.inflate(layoutInflater)
         database = FirebaseDatabase.getInstance()
         firestore = FirebaseFirestore.getInstance()
+
 
         val product = resources.getStringArray(R.array.products)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdownitem, product)
@@ -64,6 +67,7 @@ class ExpenseFragment : Fragment() {
         binding.etProduct13.setAdapter(arrayAdapter)
         binding.etProduct14.setAdapter(arrayAdapter)
         binding.etProduct15.setAdapter(arrayAdapter)
+
 
         binding.btnSaveProduct.setOnClickListener {
             if (
@@ -118,11 +122,9 @@ class ExpenseFragment : Fragment() {
 
         //upload product details to database
         //logic to save data
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR).toString()
-        val month = c.get(Calendar.MONTH).toString()
-        val day = c.get(Calendar.DAY_OF_MONTH).toString()
-        val date = c.get(Calendar.DATE).toString()
+        val calendar = Calendar.getInstance().time
+        val date = DateFormat.getDateInstance().format(calendar)
+        val year = Calendar.YEAR.toString()
 
         //loading
         val dialog2 = Dialog(requireContext())
@@ -153,7 +155,7 @@ class ExpenseFragment : Fragment() {
 
 
 
-        firestore.collection(year).document(month).collection(date).document(day)
+        firestore.collection(year).document(date)
             .set(productMap)
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
@@ -241,11 +243,13 @@ class ExpenseFragment : Fragment() {
                 val SC =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_shop_cash).text.toString()) //shop cash
 
-                if (CC != null && BC!= null && SC != null) {
+                if (CC != null && BC != null && SC != null) {
                     val dailyTotal = (CC + BC + SC)
-                    dialog.findViewById<TextInputEditText>(R.id.et_daily_total).setText(dailyTotal.toString())
+                    dialog.findViewById<TextInputEditText>(R.id.et_daily_total)
+                        .setText(dailyTotal.toString())
                 } else {
-                    Toast.makeText(requireContext(), "Enter all the value", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Enter all the value", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             }
@@ -254,12 +258,13 @@ class ExpenseFragment : Fragment() {
             makeFivePer.setOnClickListener {
                 val dt = dialog.findViewById(R.id.et_daily_total) as TextInputEditText
                 val DT = parseInt(dt.text.toString())
-                if(DT != null) {
+                if (DT != null) {
                     val fivePercent = ((DT / 100) * 5)
                     DD = dialog.findViewById(R.id.et_five_per) //five percent
                     DD.setText(fivePercent.toString())
                 } else {
-                    Toast.makeText(requireContext(), "Enter all the value", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Enter all the value", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             //set cash in will became next home cash
@@ -269,12 +274,13 @@ class ExpenseFragment : Fragment() {
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_shop_cash).text.toString()) //shop cash
                 val dt =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_five_per).text.toString()) //daily total
-                if(SC != null) {
-                    val cashIn = ( SC - dt)
+                if (SC != null) {
+                    val cashIn = (SC - dt)
                     CI = dialog.findViewById(R.id.et_cash_in)
                     CI.setText(cashIn.toString())
-                }  else {
-                    Toast.makeText(requireContext(), "Enter all the value", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "Enter all the value", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             //save Expense
@@ -283,17 +289,18 @@ class ExpenseFragment : Fragment() {
             saveDailyExpense.setOnClickListener {
 
                 val dialog2 = Dialog(requireContext())
+                dialog2.setCancelable(false)
                 dialog2.setContentView(R.layout.loading_layout)
                 if (dialog2.window != null) {
                     dialog2.window!!.setBackgroundDrawable(ColorDrawable(0))
                 }
                 dialog2.show()
 
-                val c = Calendar.getInstance()
-                val year = c.get(Calendar.YEAR).toString()
-                val month = c.get(Calendar.MONTH).toString()
-                val day = c.get(Calendar.DAY_OF_MONTH).toString()
-                val date = c.get(Calendar.DATE).toString()
+                val calender = Calendar.getInstance().time
+                val date = DateFormat.getDateInstance().format(calender)
+                val year = Calendar.YEAR.toString()
+
+                //val currentDate = date
 
                 val currentCash =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_current_cash_expense).text.toString())
@@ -319,6 +326,7 @@ class ExpenseFragment : Fragment() {
 
                 val expense =
                     Expense(
+                        //currentDate,
                         currentCash,
                         homeCash,
                         onlineBanking,
@@ -328,11 +336,9 @@ class ExpenseFragment : Fragment() {
                         cashIn
                     )
 
-
-//for testing   database.reference.child("expense").child(date).setValue(expense)
                 if (currentCash != null && homeCash != null && onlineBanking != null && dailyTotal != null && shopCash != null && fivePercent != null && cashIn != null) {
 
-                    database.reference.child("Expenses").child(year).child(date)
+                    database.reference.child("Expenses").child(date)
                         .setValue(expense)
                         .addOnSuccessListener {
                             Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
@@ -350,7 +356,8 @@ class ExpenseFragment : Fragment() {
                             dialog2.dismiss()
                         }
                 } else {
-                    Toast.makeText(requireContext(), "Enter All the fields", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Enter All the fields", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 expdialog.show()
             }

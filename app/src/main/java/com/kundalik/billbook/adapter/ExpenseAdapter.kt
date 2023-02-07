@@ -19,7 +19,7 @@ class ExpenseAdapter(private val expenseList: ArrayList<Expense>): RecyclerView.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentList = expenseList[position]
 
-        //holder.date.text = currentList.date
+        //holder.date.text = currentList.currentDate.toString()
         holder.currentCashExpense.text = currentList.currentCashExpense.toString()
         holder.homeCashExpense.text = currentList.homeCashExpense.toString()
         holder.onlineBanking.text = currentList.onlineBanking.toString()

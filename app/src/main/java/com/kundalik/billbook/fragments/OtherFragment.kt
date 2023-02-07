@@ -5,18 +5,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kundalik.billbook.R
+import android.widget.Toast
+import com.google.android.material.textfield.TextInputEditText
+import com.kundalik.billbook.databinding.FragmentOtherBinding
+import java.lang.Integer.parseInt
 
 
 class OtherFragment : Fragment() {
+
+    private lateinit var binding: FragmentOtherBinding
+    private lateinit var totalTea: TextInputEditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_other, container, false)
-    }
+        binding = FragmentOtherBinding.inflate(layoutInflater)
 
+        binding.btnTotalTea.setOnClickListener {
+            if (binding.etTotalTea.text!!.isNotEmpty()) {
+                val totalTea = parseInt(binding.etTotalTea.text.toString())
+                val total = totalTea * 7
+                val profit = total / 100 * 25
+                binding.tvTeaProfit.text = profit.toString()
+                binding.etTotalTea.setText("")
+            } else {
+                Toast.makeText(requireContext(), "Enter Total Number of Tea", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
+        return binding.root
+    }
 
 }
