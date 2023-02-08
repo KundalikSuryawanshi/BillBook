@@ -4,7 +4,8 @@ import com.google.android.material.textfield.TextInputEditText
 import java.util.Date
 
 data class Expense(
-    //val currentDate: String,
+
+    val currentDate: String="",
     val currentCashExpense: Int = 0,
     val homeCashExpense: Int = 0,
     val onlineBanking: Int = 0,

@@ -30,7 +30,7 @@ class OtherFragment : Fragment() {
                 val profit = total / 100 * 25
                 binding.tvTeaProfit.text = profit.toString()
                 binding.etTotalTea.setText("")
-            } else {
+            }  else {
                 Toast.makeText(requireContext(), "Enter Total Number of Tea", Toast.LENGTH_SHORT)
                     .show()
             }

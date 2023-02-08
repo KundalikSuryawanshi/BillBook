@@ -58,7 +58,6 @@ class PreviousFragment : Fragment() {
         }
         dialog2.show()
 
-
         databaseReference =
             FirebaseDatabase.getInstance().getReference("Expenses")
 
@@ -72,6 +71,9 @@ class PreviousFragment : Fragment() {
                         expenseArrayList.add(expense!!)
                     }
                     expenseRecyclerView.adapter = ExpenseAdapter(expenseArrayList)
+                    dialog2.dismiss()
+                } else {
+                    Toast.makeText(requireContext(), "No data found", Toast.LENGTH_SHORT).show()
                     dialog2.dismiss()
                 }
             }

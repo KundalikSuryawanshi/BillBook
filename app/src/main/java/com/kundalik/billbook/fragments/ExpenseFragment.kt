@@ -34,7 +34,7 @@ class ExpenseFragment : Fragment() {
     private lateinit var CC: TextInputEditText //current cash expense
     private lateinit var HC: TextInputEditText //home cash expense
     private lateinit var BK: TextInputEditText //banking
-    private lateinit var DT: TextInputEditText //shop cash expense
+    private lateinit var DT: TextInputEditText //daily total
     private lateinit var DD: TextInputEditText //five percent
     private lateinit var CI: TextInputEditText //cash in
 
@@ -120,56 +120,78 @@ class ExpenseFragment : Fragment() {
         val p14 = parseInt(binding.etProductAmount14.text.toString())
         val p15 = parseInt(binding.etProductAmount15.text.toString())
 
-        //upload product details to database
-        //logic to save data
-        val calendar = Calendar.getInstance().time
-        val date = DateFormat.getDateInstance().format(calendar)
-        val year = Calendar.YEAR.toString()
+        if (
+            binding.etProduct1.text!!.isNotEmpty() &&
+            binding.etProduct2.text!!.isNotEmpty() &&
+            binding.etProduct3.text!!.isNotEmpty() &&
+            binding.etProduct4.text!!.isNotEmpty() &&
+            binding.etProduct5.text!!.isNotEmpty() &&
+            binding.etProduct6.text!!.isNotEmpty() &&
+            binding.etProduct7.text!!.isNotEmpty() &&
+            binding.etProduct8.text!!.isNotEmpty() &&
+            binding.etProduct9.text!!.isNotEmpty() &&
+            binding.etProduct10.text!!.isNotEmpty() &&
+            binding.etProduct11.text!!.isNotEmpty() &&
+            binding.etProduct12.text!!.isNotEmpty() &&
+            binding.etProduct13.text!!.isNotEmpty() &&
+            binding.etProduct14.text!!.isNotEmpty() &&
+            binding.etProduct15.text!!.isNotEmpty()
 
-        //loading
-        val dialog2 = Dialog(requireContext())
-        dialog2.setContentView(R.layout.loading_layout)
-        if (dialog2.window != null) {
-            dialog2.window!!.setBackgroundDrawable(ColorDrawable(0))
+        ) {
+
+            //upload product details to database
+            //logic to save data
+            val calendar = Calendar.getInstance().time
+            val date = DateFormat.getDateInstance().format(calendar)
+            val year = Calendar.YEAR.toString()
+
+            //loading
+            val dialog2 = Dialog(requireContext())
+            dialog2.setContentView(R.layout.loading_layout)
+            if (dialog2.window != null) {
+                dialog2.window!!.setBackgroundDrawable(ColorDrawable(0))
+            }
+            dialog2.show()
+
+            //products
+            val productMap = mutableMapOf<String, Int>()
+
+            productMap.put(binding.etProduct1.text!!.toString(), p1)
+            productMap.put(binding.etProduct2.text!!.toString(), p2)
+            productMap.put(binding.etProduct3.text!!.toString(), p3)
+            productMap.put(binding.etProduct4.text!!.toString(), p4)
+            productMap.put(binding.etProduct5.text!!.toString(), p5)
+            productMap.put(binding.etProduct6.text!!.toString(), p6)
+            productMap.put(binding.etProduct7.text!!.toString(), p7)
+            productMap.put(binding.etProduct8.text!!.toString(), p8)
+            productMap.put(binding.etProduct9.text!!.toString(), p9)
+            productMap.put(binding.etProduct10.text!!.toString(), p10)
+            productMap.put(binding.etProduct11.text!!.toString(), p11)
+            productMap.put(binding.etProduct12.text!!.toString(), p12)
+            productMap.put(binding.etProduct13.text!!.toString(), p13)
+            productMap.put(binding.etProduct14.text!!.toString(), p14)
+            productMap.put(binding.etProduct15.text!!.toString(), p15)
+
+
+
+            firestore.collection(year).document(date)
+                .set(productMap)
+                .addOnSuccessListener {
+                    Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
+                    dialog2.dismiss()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(
+                        requireContext(),
+                        "fail ${it.message}",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    dialog2.dismiss()
+                }
+        } else {
+            Toast.makeText(requireContext(), "fill up all the data", Toast.LENGTH_SHORT).show()
         }
-        dialog2.show()
-
-        //products
-        val productMap = mutableMapOf<String, Int>()
-
-        productMap.put(binding.etProduct1.text!!.toString(), p1)
-        productMap.put(binding.etProduct2.text!!.toString(), p2)
-        productMap.put(binding.etProduct3.text!!.toString(), p3)
-        productMap.put(binding.etProduct4.text!!.toString(), p4)
-        productMap.put(binding.etProduct5.text!!.toString(), p5)
-        productMap.put(binding.etProduct6.text!!.toString(), p6)
-        productMap.put(binding.etProduct7.text!!.toString(), p7)
-        productMap.put(binding.etProduct8.text!!.toString(), p8)
-        productMap.put(binding.etProduct9.text!!.toString(), p9)
-        productMap.put(binding.etProduct10.text!!.toString(), p10)
-        productMap.put(binding.etProduct11.text!!.toString(), p11)
-        productMap.put(binding.etProduct12.text!!.toString(), p12)
-        productMap.put(binding.etProduct13.text!!.toString(), p13)
-        productMap.put(binding.etProduct14.text!!.toString(), p14)
-        productMap.put(binding.etProduct15.text!!.toString(), p15)
-
-
-
-        firestore.collection(year).document(date)
-            .set(productMap)
-            .addOnSuccessListener {
-                Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
-                dialog2.dismiss()
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    "fail ${it.message}",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-                dialog2.dismiss()
-            }
     }
 
     private fun makeCalculations() = if (
@@ -300,7 +322,7 @@ class ExpenseFragment : Fragment() {
                 val date = DateFormat.getDateInstance().format(calender)
                 val year = Calendar.YEAR.toString()
 
-                //val currentDate = date
+                val currentDate = date.toString()
 
                 val currentCash =
                     parseInt(dialog.findViewById<TextInputEditText>(R.id.et_current_cash_expense).text.toString())
@@ -326,7 +348,7 @@ class ExpenseFragment : Fragment() {
 
                 val expense =
                     Expense(
-                        //currentDate,
+                        currentDate,
                         currentCash,
                         homeCash,
                         onlineBanking,
