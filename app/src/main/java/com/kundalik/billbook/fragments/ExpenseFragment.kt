@@ -2,7 +2,10 @@ package com.kundalik.billbook.fragments
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.Service
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -42,8 +45,8 @@ class ExpenseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
         // Inflate the layout for this fragment
+
         binding = FragmentExpenseBinding.inflate(layoutInflater)
         database = FirebaseDatabase.getInstance()
         firestore = FirebaseFirestore.getInstance()
@@ -85,7 +88,24 @@ class ExpenseFragment : Fragment() {
                 binding.etProduct12.text.isNotEmpty() &&
                 binding.etProduct13.text.isNotEmpty() &&
                 binding.etProduct14.text.isNotEmpty() &&
-                binding.etProduct15.text.isNotEmpty()
+                binding.etProduct15.text.isNotEmpty() &&
+
+                binding.etProductAmount1.text!!.isNotEmpty() &&
+                binding.etProductAmount2.text!!.isNotEmpty() &&
+                binding.etProductAmount3.text!!.isNotEmpty() &&
+                binding.etProductAmount4.text!!.isNotEmpty() &&
+                binding.etProductAmount5.text!!.isNotEmpty() &&
+                binding.etProductAmount6.text!!.isNotEmpty() &&
+                binding.etProductAmount7.text!!.isNotEmpty() &&
+                binding.etProductAmount8.text!!.isNotEmpty() &&
+                binding.etProductAmount9.text!!.isNotEmpty() &&
+                binding.etProductAmount10.text!!.isNotEmpty() &&
+                binding.etProductAmount11.text!!.isNotEmpty() &&
+                binding.etProductAmount12.text!!.isNotEmpty() &&
+                binding.etProductAmount13.text!!.isNotEmpty() &&
+                binding.etProductAmount14.text!!.isNotEmpty() &&
+                binding.etProductAmount15.text!!.isNotEmpty()
+
             ) {
                 uploadProductDataToFireStore()
             } else {
@@ -101,6 +121,7 @@ class ExpenseFragment : Fragment() {
 
         return binding.root
     }
+
 
     private fun uploadProductDataToFireStore() {
 

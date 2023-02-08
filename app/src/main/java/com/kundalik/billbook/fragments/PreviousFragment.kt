@@ -1,7 +1,10 @@
 package com.kundalik.billbook.fragments
 
 import android.app.Dialog
+import android.app.Service
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +41,9 @@ class PreviousFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentPreviousBinding.inflate(layoutInflater)
 
+        //to check internet connection
+        checkInternetConnection()
+
         expenseRecyclerView = binding.rvPreviousExpense
         expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         expenseRecyclerView.setHasFixedSize(true)
@@ -48,10 +54,29 @@ class PreviousFragment : Fragment() {
         return binding.root
     }
 
+    private fun checkInternetConnection() {
+
+        var connectivity: ConnectivityManager? = null
+        var info: NetworkInfo? = null
+
+        connectivity =
+            requireActivity().getSystemService(Service.CONNECTIVITY_SERVICE) as ConnectivityManager
+        info = connectivity.activeNetworkInfo
+        if (info != null) {
+            if (info.state == NetworkInfo.State.CONNECTED) {
+                //Toast.makeText(requireContext(), "connected", Toast.LENGTH_SHORT).show()
+            } else if (info.state == NetworkInfo.State.SUSPENDED) {
+                Toast.makeText(requireContext(), "No Internet connection", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
     private fun loadExpenseData() {
 
         val dialog2 = Dialog(requireContext())
-        dialog2.setCancelable(false)
+        //dialog2.setCancelable(false)
+        dialog2.setTitle("Waiting for Internet Connection")
         dialog2.setContentView(R.layout.loading_layout)
         if (dialog2.window != null) {
             dialog2.window!!.setBackgroundDrawable(ColorDrawable(0))

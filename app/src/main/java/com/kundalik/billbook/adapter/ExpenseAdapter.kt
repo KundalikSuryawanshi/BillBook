@@ -30,7 +30,7 @@ class ExpenseAdapter(private val expenseList: ArrayList<Expense>): RecyclerView.
     }
 
     override fun getItemCount(): Int {
-        return expenseList.size
+        return expenseList.size // 30 //last 30 days data will be available to watch user
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
