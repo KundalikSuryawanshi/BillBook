@@ -11,15 +11,12 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
+![expense_logo](https://user-images.githubusercontent.com/108235751/217521119-711cb102-a932-419a-96a0-72dbd7e4897e.png)
 
 # BillBook📝
 
 
 "BillBook" is an android application, that manages the daily expenses of the grocery shop. 
-
-
 
 
 ## Technology Used🧑‍💻
@@ -36,7 +33,10 @@
 
 ## Screenshots😎
 
+<img src="https://user-images.githubusercontent.com/108235751/217521627-f9c935a1-7a4d-4038-be6f-fa00d257c895.jpg" width="200" /> <img src="https://user-images.githubusercontent.com/108235751/217522059-f610d0a5-7292-465f-9f30-f3d87c670393.jpg" width="200" /> <img src="https://user-images.githubusercontent.com/108235751/217522350-01842f15-7006-4c62-a889-d23320b6dc6f.jpg" width="200" /> <img src="https://user-images.githubusercontent.com/108235751/217522521-252ff24e-ac96-43ef-be27-bd41c0e6a518.jpg" width="200" /> 
 
+
+<img src="https://user-images.githubusercontent.com/108235751/217522868-5d3aecc7-b373-4256-96cd-3574df885902.jpg" width="200" /> <img src="https://user-images.githubusercontent.com/108235751/217523035-b2c0dadb-44b8-46b4-8ec2-7ed2a5a61feb.jpg" width="200" /> <img src="https://user-images.githubusercontent.com/108235751/217523262-12838697-00d2-43a3-bfd7-8ec61e08040c.jpg" width="200" /> <img src="https://user-images.githubusercontent.com/108235751/217523602-e3fe03d1-6015-4f8b-8980-43b682297890.jpg" width="200" />
 
 
 ## Features📓
