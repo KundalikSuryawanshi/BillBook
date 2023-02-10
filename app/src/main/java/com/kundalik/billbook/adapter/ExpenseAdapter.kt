@@ -8,10 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kundalik.billbook.R
 import com.kundalik.billbook.model.Expense
 
-class ExpenseAdapter(private val expenseList: ArrayList<Expense>): RecyclerView.Adapter<ExpenseAdapter.ViewHolder>() {
+class ExpenseAdapter(private var expenseList: ArrayList<Expense>) :
+    RecyclerView.Adapter<ExpenseAdapter.ViewHolder>() {
+
+    fun searchByDate(searchList: List<Expense>) {
+        expenseList = searchList as ArrayList<Expense>
+        notifyDataSetChanged()
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_expense_layout, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_expense_layout, parent, false)
 
         return ViewHolder(itemView)
     }
@@ -28,6 +36,7 @@ class ExpenseAdapter(private val expenseList: ArrayList<Expense>): RecyclerView.
         holder.fivePercent.text = currentList.fivePercent.toString()
         holder.cashIn.text = currentList.cashIn.toString()
     }
+
 
     override fun getItemCount(): Int {
         return expenseList.size // 30 //last 30 days data will be available to watch user
@@ -46,4 +55,6 @@ class ExpenseAdapter(private val expenseList: ArrayList<Expense>): RecyclerView.
         val cashIn: TextView = itemView.findViewById(R.id.tv_cash_in)
 
     }
+
+
 }

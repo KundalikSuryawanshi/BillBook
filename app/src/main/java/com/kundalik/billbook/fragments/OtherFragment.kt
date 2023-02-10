@@ -27,11 +27,11 @@ class OtherFragment : Fragment() {
             if (binding.etTotalTea.text!!.isNotEmpty()) {
                 val totalTea = parseInt(binding.etTotalTea.text.toString())
                 val total = totalTea * 7
-                val teaExp = (total*25)/100
+                val teaExp = (total * 25) / 100
                 val profit = total - teaExp
                 binding.tvTeaProfit.text = profit.toString()
                 binding.etTotalTea.setText("")
-            }  else {
+            } else {
                 Toast.makeText(requireContext(), "Enter Total Number of Tea", Toast.LENGTH_SHORT)
                     .show()
             }

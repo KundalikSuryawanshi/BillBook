@@ -30,7 +30,7 @@ class OTPActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
-        val userMobile = "+91"+intent.getStringExtra("mobile").toString()
+        val userMobile = "+91" + intent.getStringExtra("mobile").toString()
 
         setCountDownTimer()
 
@@ -124,7 +124,8 @@ class OTPActivity : AppCompatActivity() {
                     finish()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this@OTPActivity, "Error ${it.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@OTPActivity, "Error ${it.message}", Toast.LENGTH_SHORT)
+                        .show()
                     dialog.dismiss()
                 }
         } else {
@@ -142,7 +143,6 @@ class OTPActivity : AppCompatActivity() {
         super.onStop()
         timer.cancel()
     }
-
 
 
 }

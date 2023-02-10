@@ -20,10 +20,5 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-//        binding.btnLoginContinue.setOnClickListener {
-//            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-//            finish()
-//        }
-
     }
 }

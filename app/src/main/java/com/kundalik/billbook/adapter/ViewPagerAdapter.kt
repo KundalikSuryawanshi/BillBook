@@ -9,17 +9,20 @@ class ViewPagerAdapter(
     private val context: Context,
     fragmentManager: FragmentManager?,
     private val fragmentList: ArrayList<Fragment>,
-): FragmentPagerAdapter(fragmentManager!!) {
+) : FragmentPagerAdapter(fragmentManager!!) {
 
     companion object {
-        val TAB_TITLE = arrayOf("Products","Expense","Tea")
+        val TAB_TITLE = arrayOf("Products", "Expense", "Tea")
     }
+
     override fun getCount(): Int {
         return fragmentList.size
     }
+
     override fun getItem(position: Int): Fragment {
-       return fragmentList[position]
+        return fragmentList[position]
     }
+
     override fun getPageTitle(position: Int): CharSequence {
         return TAB_TITLE[position]
     }

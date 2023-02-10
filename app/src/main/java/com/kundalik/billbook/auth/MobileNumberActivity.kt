@@ -17,8 +17,12 @@ class MobileNumberActivity : AppCompatActivity() {
 
         binding.btnMobileContinue.setOnClickListener {
             val userMobile = binding.etUserMobile.text.toString()
-            if (userMobile.isEmpty()){
-                Toast.makeText(this@MobileNumberActivity, "Enter your mobile number", Toast.LENGTH_SHORT).show()
+            if (userMobile.isEmpty()) {
+                Toast.makeText(
+                    this@MobileNumberActivity,
+                    "Enter your mobile number",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 val intent = Intent(this@MobileNumberActivity, OTPActivity::class.java)
                 intent.putExtra("mobile", userMobile)

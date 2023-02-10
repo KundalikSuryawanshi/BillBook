@@ -5,13 +5,84 @@
 
     <string-array name="products">
 
-        <item>Atul Milk</item>
-        <item>Dairy Power Milk</item>
-        <item>Atul Dahi</item>
-        <item>Dairy Power Dahi</item>
-        <item>Vedant EnterPrices</item>
-        <item>Other_1</item>
-        <item>Other_2</item>
+        <item>Atul Milk/Dahi</item>
+        <item>DairyPowerMilk/Dahi</item>
+        <item>Govind Dahi</item>
+        <item>Babasai Bread</item>
+        <item>Protein Bread</item>
+        <item>Kelori Bread</item>
+        <item>Maruti Wafers/Farsan</item>
+        <item>Idali Atta</item>
+        <item>Yogesh Products</item>
+        <item>Lollipop/Chocolate </item>
+        <item>Balaji Wafers</item>
+        <item>Lays Wafers</item>
+        <item>PeanutRoll/CreamRoll</item>
+        <item>Malkist/LotteCP</item>
+        <item>Bhushan Enterprise</item>
+        <item>Bhagyoday sales</item>
+        <item>AniketE(xpert/dettol)</item>
+        <item>BhagavariE(Everest)</item>
+        <item>DurgaT(supat/parivar)</item>
+        <item>Sunny Oil</item>
+        <item>Amul Products</item>
+        <item>Britannia</item>
+        <item>ShreeGaneshTreders</item>
+        <item>Swami Krupa(TeaCup)</item>
+        <item>Cleaning Powder</item>
+        <item>Divya Mrkt Colgate</item>
+        <item>Rudra Enterprise</item>
+        <item>New Singh(parle)</item>
+        <item>Hareram Agency</item>
+        <item>Bub Treading(gemini)</item>
+        <item>PrashantD(sunny)</item>
+        <item>Kotkar Agency</item>
+        <item>Lakshmi Agency(Maggie)</item>
+        <item>Sakshi Enterprise</item>
+        <item>C.G Marketing</item>
+        <item>Agrawal Company</item>
+        <item>Bora Sugar</item>
+        <item>Anat Enterprises</item>
+        <item>Pepsi/thumps Up/cold drinks</item>
+        <item>Hinglaj Agency</item>
+        <item>Udan</item>
+        <item>Gul</item>
+        <item>Vedant Enterprise</item>
+        <item>Atharv Agency(Suhana)</item>
+        <item>Broom Products</item>
+        <item>Rohan Enterprise</item>
+        <item>Masale Patti</item>
+        <item>Viraj Treding</item>
+        <item>R.R.Enterprise</item>
+        <item>Bisleri</item>
+        <item>ParamRaj Agency</item>
+        <item>Niraj Enterprise</item>
+        <item>Vaishnavi Enterprise</item>
+        <item>Jisha Enterprise</item>
+        <item>Kurkure</item>
+        <item>Shampoo</item>
+        <item>Cadbury</item>
+        <item>Ice-cream</item>
+        <item>TATA-salt</item>
+        <item>KOKO Enterprise</item>
+        <item>Pooja Agency</item>
+        <item>Nayan Sales</item>
+        <item>Durga Treader</item>
+        <item>Samrudhi Murmure</item>
+        <item>Renuka Enterprise</item>
+        <item>well safe</item>
+        <item>HeadWay MegaCop(FoodRite)</item>
+        <item>HariOm Treader</item>
+        <item>Morya sales</item>
+        <item>Bhavya Enterprise</item>
+        <item>Bhavya Enterprise</item>
+        <item>Nisha HairColor</item>
+        <item>Krishna Sales</item>
+        <item>Raghunandan Enterprise</item>
+        <item>Shubham Enterprise</item>
+        <item>SaiRam Agency</item>
+        <item>New_item_1</item>
+        <item>New_item_2</item>
 
     </string-array>
 </resources>

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,7 @@ class PreviousFragment : Fragment() {
     private lateinit var expenseRecyclerView: RecyclerView
     private lateinit var expenseArrayList: ArrayList<Expense>
 
+
     val calendar = Calendar.getInstance().time
     val date = DateFormat.getDateInstance().format(calendar)
     val year = Calendar.YEAR.toString()
@@ -41,6 +43,7 @@ class PreviousFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentPreviousBinding.inflate(layoutInflater)
 
+
         //to check internet connection
         checkInternetConnection()
 
@@ -48,10 +51,34 @@ class PreviousFragment : Fragment() {
         expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         expenseRecyclerView.setHasFixedSize(true)
 
+
         expenseArrayList = arrayListOf<Expense>()
         loadExpenseData()
 
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                searchExpenseByDate(newText)
+                return true
+            }
+
+        })
+
         return binding.root
+    }
+
+    fun searchExpenseByDate(text: String) {
+        val searchList = kotlin.collections.ArrayList<Expense>()
+        for (date in searchList) {
+            if (date.currentDate?.lowercase()?.contains(text.lowercase()) == true) {
+                searchList.add(date)
+            }
+        }
+        val exp = ExpenseAdapter(expenseArrayList)
+        exp.searchByDate(searchList)
     }
 
     private fun checkInternetConnection() {
